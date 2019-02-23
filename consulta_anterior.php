@@ -174,6 +174,9 @@ if ($res != 0) {
            onclick="if (validar_formulari(document.getElementById('form_2'))) document.getElementById('form_2').submit();">
     <?php
     echo '</form>';
+    echo '<div style="margin-top: 25px; float: right">
+    v0.1
+</div>';
 
 } else {
     echo '<p>&nbsp;</p>

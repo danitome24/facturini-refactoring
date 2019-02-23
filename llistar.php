@@ -217,7 +217,9 @@ if ($enviar) {
             <br><input type="submit" name="enviar" value="Imprimir">
         </form>
 
-
+        <div style="margin-top: 25px; float: right">
+            v0.1
+        </div>
         <?php
     } else {
         echo "<p>No hi ha registres que satisfacin la cerca.</p>";

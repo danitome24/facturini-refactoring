@@ -112,5 +112,10 @@ echo '</form>';
     $menu .= "</p>";
     echo $menu;
     ?>
+    <?php
+    echo '<div style="margin-top: 25px; float: right">
+    v0.1
+</div>';
+    ?>
 </body>
 </html>
