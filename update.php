@@ -3,7 +3,6 @@
 require_once("config.php");
 require_once("includes/sql_layer.php");
 
-// JV
 if (empty($num_reg)) {
     $num_reg = $_POST['num_reg'];
 }

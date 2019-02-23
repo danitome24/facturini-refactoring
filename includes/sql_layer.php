@@ -1,4 +1,5 @@
 <?php
+
 class ResultSet
 {
     var $result;
@@ -44,7 +45,6 @@ class ResultSet
 
 function sql_connect($host, $user, $password, $db)
 {
-    //global $dbtype;
     if (!$dbi = mysqli_connect($host, $user, $password)) {
         die('error connection db');
     }
@@ -75,9 +75,6 @@ function sql_logout($id)
 
 function sql_query($query, $id)
 {
-
-    global $dbtype;
-
     global $sql_debug;
     $sql_debug = 0;
     if ($sql_debug) {

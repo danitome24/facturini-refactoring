@@ -10,11 +10,9 @@
 <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>-ERROR-</strong></font></p>
 
 <?php
-// JV
 if (empty($op)) {
     $op = $_POST['op'];
 }
-//
 
 switch ($op) {
     case "1":
