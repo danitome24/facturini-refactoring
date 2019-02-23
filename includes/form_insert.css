@@ -1,0 +1,13 @@
+body {
+    margin: 64px;
+    font-family: "lucida grande", verdana, lucida, sans-serif;
+    font-size: 8pt;
+}
+
+table {
+    border: 0px;
+}
+
+#facturaError {
+    color: red;
+}
