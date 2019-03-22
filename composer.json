@@ -24,6 +24,7 @@
         "optimize-autoloader": true
     },
     "scripts": {
-        "server": "docker-compose up"
+        "start-server": "docker-compose up -d",
+        "stop-server": "docker-compose stop"
     }
 }
