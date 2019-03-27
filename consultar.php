@@ -134,7 +134,7 @@ $menu .= "</p>";
 echo $menu;
 ?>
 <div style="margin-top: 25px; float: right">
-    v0.1
+    v0.2
 </div>
 </body>
 </html>

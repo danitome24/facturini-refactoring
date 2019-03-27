@@ -1,0 +1,30 @@
+{
+    "name": "dtome/facturini",
+    "version": "0.2",
+    "license": "",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Daniel Tome Fernandez",
+            "email": "danieltomefer@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Facturini\\": "src/Facturini"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Facturini\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "scripts": {
+        "start-server": "docker-compose up -d",
+        "stop-server": "docker-compose stop"
+    }
+}
