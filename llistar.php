@@ -166,7 +166,7 @@ if ($enviar) {
             <?php while ($array = mysqli_fetch_assoc($result)) { ?>
                 <tr>
                     <td align='center'>
-                        <input type='checkbox' name='regs[" <?php echo $array['num_reg'] ?> "]'>
+                        <input type='checkbox' name='regs[ <?php echo $array['num_reg'] ?> ]'>
                     </td>
                     <td><?php echo $array['num_reg'] ?></td>
                     <td><?php echo date_format(date_create($array['fecha_solicitud']), "d/m/Y") ?> </td>

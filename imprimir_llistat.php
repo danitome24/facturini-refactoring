@@ -1,7 +1,7 @@
 <?php
-require_once("config.php");
-require_once("includes/sql_layer.php");
-include('includes/php-pdf/class.ezpdf.php');
+require_once 'config.php';
+require_once 'includes/sql_layer.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 $dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
 
@@ -23,7 +23,7 @@ if (isset($regs)) {
     $any = $factures[0]['any'];
 
     $pdf = new Cezpdf('a4');
-    $pdf->selectFont('includes/php-pdf/fonts/Helvetica.afm');
+    $pdf->selectFont(__DIR__ . '/vendor/rebuy/ezpdf/src/ezpdf/fonts/Helvetica.afm');
 
     $nom = utf8_decode("FACTURACIÓ INTERNA SOL·LICITADA");
     $data = array(
