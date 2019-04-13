@@ -1,9 +1,13 @@
 <?php
-require_once("config.php");
-require_once("includes/sql_layer.php");
 
-$dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
-sql_query("SET NAMES utf8", $dbi);
+use Facturini\Database\Mysqli\MysqliConnection;
+use Facturini\Database\Mysqli\MysqliQuery;
+
+require_once 'config.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
+$dbConnection = MysqliConnection::create($dbhost, $dbuname, $dbpass, $dbname);
+$dbQuery = new MysqliQuery($dbConnection, $dbDebugMode);
 
 $data_inici = $_POST['data_inici'];
 $data_fi = $_POST['data_fi'];
@@ -66,8 +70,8 @@ if ($enviar) {
         $consulta .= $filtres['cobrada'];
     }
     $consulta .= "order by num_reg DESC";
-    $result = mysqli_query($dbi, $consulta) or die (mysql_error());
-    $num_rows = mysqli_num_rows($result);
+    $result = $dbQuery->query($consulta) or die(mysqli_errno($dbConnection));
+    $num_rows = $result->numberOfResults();
 }
 ?>
 
@@ -163,7 +167,7 @@ if ($enviar) {
             <td width="65%">Nom</td>
             </thead>
             <tbody>
-            <?php while ($array = mysqli_fetch_assoc($result)) { ?>
+            <?php while ($array = $result->inArray()) { ?>
                 <tr>
                     <td align='center'>
                         <input type='checkbox' name='regs[ <?php echo $array['num_reg'] ?> ]'>
@@ -191,6 +195,7 @@ if ($enviar) {
 <?php } else {
     echo "<p>No hi ha registres que satisfacin la cerca.</p>";
 }
+$dbConnection->disconnect();
 ?>
 </body>
 </html>
