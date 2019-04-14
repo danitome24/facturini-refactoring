@@ -148,7 +148,7 @@ $res = sql_fetch_array($result, $dbi);
                    onclick="if (validar_formulari(document.getElementById('form_2'))) document.getElementById('form_2').submit();">
 </form>
 <div style="margin-top: 25px; float: right">
-    v0.2
+    v0.3
 </div>
 </body>
 </html>
