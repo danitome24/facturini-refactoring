@@ -101,7 +101,7 @@ $result = mysqli_query($dbi, $query) or die (mysqli_error());
     <?php while ($array = mysqli_fetch_assoc($result)) { ?>
         <tr>
             <td>
-                <a href='consulta_anterior.php?num_reg=" <?php echo $array['num_reg'] ?> "'
+                <a href='consulta_anterior.php?num_reg=<?php echo $array['num_reg'] ?>'
                    target='_self'>  <?php echo $array['num_reg'] ?></a>
             </td>
             <td><?php echo date_format(date_create($array['fecha_solicitud']), "d/m/Y") ?></td>
@@ -134,7 +134,7 @@ $menu .= "</p>";
 echo $menu;
 ?>
 <div style="margin-top: 25px; float: right">
-    v0.2
+    v0.3
 </div>
 </body>
 </html>

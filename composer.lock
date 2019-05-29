@@ -1,0 +1,41 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "e60d7b0b4f79cd500d1902fc4cd697c0",
+    "packages": [
+        {
+            "name": "rebuy/ezpdf",
+            "version": "0.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rebuy-de/ezpdf.git",
+                "reference": "5f906c3b74e1d14db57d6cf4c09cc8918dd67390"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rebuy-de/ezpdf/zipball/5f906c3b74e1d14db57d6cf4c09cc8918dd67390",
+                "reference": "5f906c3b74e1d14db57d6cf4c09cc8918dd67390",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2012-12-12T15:33:59+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

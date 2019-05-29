@@ -1,24 +1,20 @@
 <?php
-require_once("config.php");
-require_once("includes/sql_layer.php");
-include('includes/php-pdf/class.ezpdf.php');
+require_once 'config.php';
+require_once 'includes/sql_layer.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 if (empty($num_reg)) {
     $num_reg = $_REQUEST['num_reg'];
 }
-
 
 $dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
 sql_query("SET NAMES utf8", $dbi);
 $result = sql_query("select * from " . $table_name . " where num_reg='" . $num_reg . "'", $dbi);
 
 if (isset($num_reg) && mysqli_num_rows($result) > 0) {
-
     $res = sql_fetch_array($result, $dbi);
-
-
     $pdf = new Cezpdf('a4');
-    $pdf->selectFont('includes/php-pdf/fonts/Helvetica.afm');
+    $pdf->selectFont(__DIR__ . '/vendor/rebuy/ezpdf/src/ezpdf/fonts/Helvetica.afm');
     $pdf->ezText("Facturini\n", 8, array('left' => 45));
     $pdf->ezText("Carrer major, 7", 6, array('left' => 45));
     $pdf->ezText("40000 Barcelona", 6, array('left' => 45));
@@ -73,14 +69,20 @@ if (isset($num_reg) && mysqli_num_rows($result) > 0) {
     $pdf->ezStream();
 } else {
     ?>
-    <p align="center"><font size="3" face="Verdana, Arial, Helvetica, sans-serif"><strong>Imprimir factura
-                (FACTURINI)</strong></font></p>
-    <p><strong><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><a href="index.htm">Anar a la plana
-                    inicial</a></font></strong></p>
-    <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif">No hi ha cap registre amb aquest
-            n&uacute;mero.</font></p>
-
+    <p align="center">
+        <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><strong>Imprimir factura (FACTURINI)</strong></font>
+    </p>
+    <p>
+        <strong>
+            <font size="2" face="Verdana, Arial, Helvetica, sans-serif">
+                <a href="index.htm">Anar a la plana inicial</a>
+            </font>
+        </strong>
+    </p>
+    <p>
+        <font size="2" face="Verdana, Arial, Helvetica, sans-serif">No hi ha cap registre amb aquest
+            n&uacute;mero.</font>
+    </p>
     <?php
 }
-
 ?>
