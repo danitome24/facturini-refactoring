@@ -1,15 +1,20 @@
 <?php
-require_once("config.php");
-require_once("includes/sql_layer.php");
+
+use Facturini\Database\Mysqli\MysqliConnection;
+use Facturini\Database\Mysqli\MysqliQuery;
+
+require_once 'config.php';
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 if (empty($num_reg)) {
     $num_reg = $_REQUEST['num_reg'];
 }
 
-$dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
-sql_query("SET NAMES utf8", $dbi);
-$result = sql_query("select * from " . $table_name . " where num_reg='$num_reg'", $dbi);
-$res = sql_fetch_array($result, $dbi);
+$dbConnection = MysqliConnection::create($dbhost, $dbuname, $dbpass, $dbname);
+$dbQuery = new MysqliQuery($dbConnection, $dbDebugMode);
+$result = $dbQuery->query('select * from ' . $table_name . " where num_reg='$num_reg'");
+$res = $result->inArray();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -139,11 +144,11 @@ $res = sql_fetch_array($result, $dbi);
                 Observacions:
                 <br>
                 <textarea name="observacions" cols="50" rows="5"
-                          wrap="hard"><?php stripslashes($res['observacions']) ?></textarea>
+                          wrap="hard"><?php echo stripslashes($res['observacions']) ?></textarea>
             </font>
             <br>
             <br>
-            <input type=hidden name=num_reg value='<?php echo $res[' num_reg'] ?>'>
+            <input type=hidden name=num_reg value=<?php echo $res['num_reg'] ?>>
             <input type="button" alt="Insertar" value="Tramet la consulta"
                    onclick="if (validar_formulari(document.getElementById('form_2'))) document.getElementById('form_2').submit();">
 </form>
@@ -152,4 +157,7 @@ $res = sql_fetch_array($result, $dbi);
 </div>
 </body>
 </html>
-<?php } ?>
+<?php
+}
+$dbConnection->disconnect();
+?>

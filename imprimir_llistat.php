@@ -1,9 +1,13 @@
 <?php
+
+use Facturini\Database\Mysqli\MysqliConnection;
+use Facturini\Database\Mysqli\MysqliQuery;
+
 require_once 'config.php';
-require_once 'includes/sql_layer.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
-$dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
+$dbConnection = MysqliConnection::create($dbhost, $dbuname, $dbpass, $dbname);
+$dbQuery = new MysqliQuery($dbConnection, $dbDebugMode);
 
 $regs = $_POST['regs'];
 
@@ -15,8 +19,8 @@ if (isset($regs)) {
 
     $consulta = "SELECT num_reg, fecha_solicitud, YEAR(fecha_solicitud) any, nom, adreca, factura, cobrada FROM " . $table_name . " WHERE num_reg IN (" . substr($registres,
             0, -2) . ") ORDER BY num_reg";
-    $result = mysqli_query($dbi, $consulta) or die (mysqli_error());
-    while ($array = mysqli_fetch_assoc($result)) {
+    $result = $dbQuery->query($consulta) or die(mysqli_error($dbConnection));
+    while ($array = $result->inArray()) {
         $factures[] = $array;
     }
 
@@ -109,4 +113,5 @@ if (isset($regs)) {
             imprimir.</font></p>
     <?php
 }
+$dbConnection->disconnect();
 ?>

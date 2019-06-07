@@ -1,7 +1,10 @@
 <?php
 
-require_once("config.php");
-require_once("includes/sql_layer.php");
+use Facturini\Database\Mysqli\MysqliConnection;
+use Facturini\Database\Mysqli\MysqliQuery;
+
+require_once 'config.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 if (empty($num_reg)) {
     $num_reg = $_POST['num_reg'];
@@ -33,11 +36,12 @@ if (empty($fecha_solicitud)) {
 if (empty($cobrada)) {
     $cobrada = $_POST['cobrada'];
 }
-$dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
-sql_query("SET NAMES utf8", $dbi);
-$result = sql_query("update " . $table_name . " set nom='" . addslashes($nom) . "',adreca='" . addslashes($adreca)
+$dbConnection = MysqliConnection::create($dbhost, $dbuname, $dbpass, $dbname);
+$dbQuery = new MysqliQuery($dbConnection, false);
+$sqlQuery = 'update ' . $table_name . " set nom='" . addslashes($nom) . "',adreca='" . addslashes($adreca)
     . "',nif='$nif',detalls='" . addslashes($detalls) . "',factura='$factura',observacions='" . addslashes($observacions)
-    . "',tipus='$tipus',fecha_solicitud='$fecha_solicitud',cobrada='$cobrada',modificat='1' where num_reg='$num_reg'",
-    $dbi);
+    . "',tipus='$tipus',fecha_solicitud='$fecha_solicitud',cobrada='$cobrada',modificat='1' where num_reg='$num_reg'";
+$result = $dbQuery->query($sqlQuery);
+$dbConnection->disconnect();
 Header("Location:index.htm");
 ?>

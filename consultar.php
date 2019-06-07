@@ -1,9 +1,13 @@
 <?php
-require_once("config.php");
-require_once("includes/sql_layer.php");
 
-$dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
-sql_query("SET NAMES utf8", $dbi);
+use Facturini\Database\Mysqli\MysqliConnection;
+use Facturini\Database\Mysqli\MysqliQuery;
+
+require_once 'config.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
+$dbConnection = MysqliConnection::create($dbhost, $dbuname, $dbpass, $dbname);
+$dbQuery = new MysqliQuery($dbConnection, $dbDebugMode);
 
 $camp = $_GET['camp'];
 $ordre = $_GET['ordre'];
@@ -15,18 +19,17 @@ if (!isset($camp) || $camp == "") {
     $pagina = 0;
 }
 
-$query = "SELECT count(*) total from " . $table_name;
-$result = mysqli_query($dbi, $query) or die (mysqli_error());
-$array = mysqli_fetch_assoc($result);
+$query = 'SELECT count(*) total from ' . $table_name;
+$result = $dbQuery->query($query);
+$array = $result->inArray();
 $total = $array['total'];
 
 if ($camp == "modificat") {
     $camp = "modificat " . $ordre . ", num_reg desc";
     $ordre = "";
 }
-$query = "SELECT num_reg, fecha_solicitud, nom, modificat from " . $table_name . " order by " . $camp . " " . $ordre . " limit " . $pagina . ",20";
-$result = mysqli_query($dbi, $query) or die (mysqli_error());
-
+$query = 'SELECT num_reg, fecha_solicitud, nom, modificat from ' . $table_name . " order by " . $camp . " " . $ordre . " limit " . $pagina . ",20";
+$result = $dbQuery->query($query) or die(mysqli_error($dbConnection->connection()));
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -98,7 +101,7 @@ $result = mysqli_query($dbi, $query) or die (mysqli_error());
     <td width="10%">Imprimir</td>
     </thead>
     <tbody>
-    <?php while ($array = mysqli_fetch_assoc($result)) { ?>
+    <?php while ($array = $result->inArray()) { ?>
         <tr>
             <td>
                 <a href='consulta_anterior.php?num_reg=<?php echo $array['num_reg'] ?>'

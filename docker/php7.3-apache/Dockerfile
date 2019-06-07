@@ -17,8 +17,8 @@ RUN groupmod -g 1000 www-data
 RUN a2enmod rewrite
 
 #Enable xdebug. This must be enable ONLY for dev purposes
-#RUN pecl install xdebug
-#RUN docker-php-ext-enable xdebug
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
 
 #Set Spain's datetime
 ENV TZ=Europe/Madrid

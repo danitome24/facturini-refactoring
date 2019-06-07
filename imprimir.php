@@ -1,18 +1,21 @@
 <?php
+
+use Facturini\Database\Mysqli\MysqliConnection;
+use Facturini\Database\Mysqli\MysqliQuery;
+
 require_once 'config.php';
-require_once 'includes/sql_layer.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
 if (empty($num_reg)) {
     $num_reg = $_REQUEST['num_reg'];
 }
+$dbConnection = MysqliConnection::create($dbhost, $dbuname, $dbpass, $dbname);
+$dbQuery = new MysqliQuery($dbConnection, false);
 
-$dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
-sql_query("SET NAMES utf8", $dbi);
-$result = sql_query("select * from " . $table_name . " where num_reg='" . $num_reg . "'", $dbi);
+$result = $dbQuery->query('select * from ' . $table_name . " where num_reg='" . $num_reg . "'");
 
-if (isset($num_reg) && mysqli_num_rows($result) > 0) {
-    $res = sql_fetch_array($result, $dbi);
+if (isset($num_reg) && $result->numberOfResults() > 0) {
+    $res = $result->inArray();
     $pdf = new Cezpdf('a4');
     $pdf->selectFont(__DIR__ . '/vendor/rebuy/ezpdf/src/ezpdf/fonts/Helvetica.afm');
     $pdf->ezText("Facturini\n", 8, array('left' => 45));
@@ -67,6 +70,7 @@ if (isset($num_reg) && mysqli_num_rows($result) > 0) {
 
     $pdf->ezText("\n\n", 10, 'left');
     $pdf->ezStream();
+    $dbConnection->disconnect();
 } else {
     ?>
     <p align="center">

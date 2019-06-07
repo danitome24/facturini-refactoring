@@ -1,6 +1,10 @@
 <?php
-require_once("config.php");
-require_once("includes/sql_layer.php");
+
+use Facturini\Database\Mysqli\MysqliConnection;
+use Facturini\Database\Mysqli\MysqliQuery;
+
+require_once 'config.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 if (empty($num_reg)) {
     $num_reg = $_POST['num_reg'];
@@ -36,17 +40,17 @@ if (empty($cobrada)) {
     $cobrada = $_POST['cobrada'];
 }
 
-$dbi = sql_connect($dbhost, $dbuname, $dbpass, $dbname);
-sql_query("SET NAMES utf8", $dbi);
-$fecha = date("Y-m-d H:i:s");
+$dbConnection = MysqliConnection::create($dbhost, $dbuname, $dbpass, $dbname);
+$sqlQuery = new MysqliQuery($dbConnection, false);
+$fecha = date('Y-m-d H:i:s');
 if ($fecha_solicitud == "" || !isset($fecha_solicitud)) {
     $fecha_solicitud = $fecha;
 }
-$query = "insert into " . $table_name . " values ('','" . $nom . "','" . $adreca . "','" . $nif . "','" . $detalls . "','" . $factura . "','" . $observacions . "','" . $tipus . "','" . $fecha_solicitud . "','" . $fecha . "','" . $cobrada . "', DEFAULT)";
-$result = mysqli_query($dbi, $query) or die (mysqli_error());
+$query = 'insert into ' . $table_name . " values ('','" . $nom . "','" . $adreca . "','" . $nif . "','" . $detalls . "','" . $factura . "','" . $observacions . "','" . $tipus . "','" . $fecha_solicitud . "','" . $fecha . "','" . $cobrada . "', DEFAULT)";
+$result = $sqlQuery->query($query);
 if ($result) {
-    Header("Location:index.htm");
+    Header('Location:index.htm');
 } else {
-    Header("Location:error.php?op=3");
+    Header('Location:error.php?op=3');
 }
 ?>
