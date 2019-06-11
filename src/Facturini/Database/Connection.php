@@ -13,5 +13,5 @@ interface Connection
 
     public function connection();
 
-    public function disconnect(): bool;
+    public function disconnect();
 }

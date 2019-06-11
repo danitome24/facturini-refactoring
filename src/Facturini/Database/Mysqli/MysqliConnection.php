@@ -54,7 +54,7 @@ final class MysqliConnection implements Connection
         return $this->connection;
     }
 
-    public function disconnect(): bool
+    public function disconnect()
     {
         global $dbtype;
         switch ($dbtype) {
