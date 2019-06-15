@@ -128,4 +128,94 @@ class FeatureContext extends MinkContext
         $this->db->query('TRUNCATE TABLE factura');
         $this->dbConnection->disconnect();
     }
+
+    /**
+     * @Given /^There are no invoices on system$/
+     */
+    public function thereAreNoInvoicesOnSystem()
+    {
+        return true;
+    }
+
+    /**
+     * @Given /^There are five invoices on system$/
+     */
+    public function thereAreFiveInvoicesOnSystem()
+    {
+        $firstInvoice = $this->buildAnInvoiceWith([
+            'num_reg' => 1,
+            'nom' => 'First invoice',
+            'adreca' => 'c/ first invoice',
+            'factura' => 12.5,
+            'tipus' => 0,
+            'cobrada' => 1,
+            'fecha_solicitud' => '2019-05-05',
+        ]);
+        $secondInvoice = $this->buildAnInvoiceWith([
+            'num_reg' => 2,
+            'nom' => 'Second invoice',
+            'adreca' => 'c/ second invoice',
+            'factura' => 6,
+            'tipus' => 0,
+            'fecha_solicitud' => '2019-01-05',
+        ]);
+        $thirdInvoice = $this->buildAnInvoiceWith([
+            'num_reg' => 3,
+            'nom' => 'Third invoice',
+            'adreca' => 'c/ third invoice',
+            'factura' => 2,
+            'tipus' => 1,
+            'cobrada' => 1,
+            'fecha_solicitud' => '2019-02-03',
+        ]);
+        $fourthInvoice = $this->buildAnInvoiceWith([
+            'num_reg' => 4,
+            'nom' => 'Fourth invoice',
+            'adreca' => 'c/ fourth invoice',
+            'factura' => 44.5,
+            'tipus' => 0,
+            'fecha_solicitud' => '2019-04-23',
+        ]);
+        $fifthInvoice = $this->buildAnInvoiceWith([
+            'num_reg' => 5,
+            'nom' => 'Fifth invoice',
+            'adreca' => 'c/ fifth invoice',
+            'factura' => 102.4,
+            'tipus' => 0,
+            'fecha_solicitud' => '2019-06-01',
+        ]);
+        $this->insertIntoDatabaseAGivenInvoiceInArray($firstInvoice);
+        $this->insertIntoDatabaseAGivenInvoiceInArray($secondInvoice);
+        $this->insertIntoDatabaseAGivenInvoiceInArray($thirdInvoice);
+        $this->insertIntoDatabaseAGivenInvoiceInArray($fourthInvoice);
+        $this->insertIntoDatabaseAGivenInvoiceInArray($fifthInvoice);
+    }
+
+    private function buildAnInvoiceWith(array $data = []): array
+    {
+        return [
+            'num_reg' => $data['num_reg'] ?? 1,
+            'nom' => $data['nom'] ?? 'Random invoice',
+            'adreca' => $data['adreca'] ?? 'c/ first invoice',
+            'nif' => '11111111K',
+            'detalls' => 'Some details about first invoice',
+            'factura' => $data['factura'] ?? 12.5,
+            'observacions' => 'No comments',
+            'tipus' => $data['tipus'] ?? 0,
+            'fecha_solicitud' => $data['fecha_solicitud'] ?? '2019-05-05',
+            'fecha' => '2019-06-06',
+            'cobrada' => $data['cobrada'] ?? 0,
+            'modificat' => 1
+        ];
+    }
+
+    private function insertIntoDatabaseAGivenInvoiceInArray(array $newInvoice): void
+    {
+        $sqlQuery = "insert into factura values ('" . $newInvoice['num_reg'] . "','" . $newInvoice['nom'] . "','" .
+            $newInvoice['adreca'] . "','" . $newInvoice['nif'] . "'," . "'" . $newInvoice['detalls'] . "','" .
+            $newInvoice['factura'] . "','" . $newInvoice['observacions'] . "','" . $newInvoice['tipus'] .
+            "','" . $newInvoice['fecha_solicitud'] . "'," . "'" . $newInvoice['fecha'] . "','" .
+            $newInvoice['cobrada'] . "','" . $newInvoice['modificat'] . "')";
+        $this->db->query($sqlQuery);
+    }
 }
