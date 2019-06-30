@@ -48,8 +48,12 @@ class FeatureContext extends MinkContext
     public function anExistingInvoiceWithNameAndApplicationDate($name, $applicationDate)
     {
         $createdOn = date('Y-m-d H:i:s');
-        $sqlQuery = "INSERT INTO factura (nom, fecha, fecha_solicitud) VALUES ('" . $name . "', '" . $createdOn . "', '" . $applicationDate . "');";
-        $this->db->query($sqlQuery);
+        $newInvoice = $this->buildAnInvoiceWith([
+            'nom' => $name,
+            'fecha' => $createdOn,
+            'fecha_solicitud' => $applicationDate
+        ]);
+        $this->insertIntoDatabaseAGivenInvoiceInArray($newInvoice);
     }
 
     /**
@@ -58,8 +62,12 @@ class FeatureContext extends MinkContext
     public function anExistingInvoiceWithNameAndState($name, $state)
     {
         $createdOn = date('Y-m-d H:i:s');
-        $sqlQuery = "INSERT INTO factura (nom, fecha, modificat) VALUES ('" . $name . "', '" . $createdOn . "', '" . $state . "')";
-        $this->db->query($sqlQuery);
+        $newInvoice = $this->buildAnInvoiceWith([
+            'nom' => $name,
+            'fecha' => $createdOn,
+            'modificat' => $state
+        ]);
+        $this->insertIntoDatabaseAGivenInvoiceInArray($newInvoice);
     }
 
     /**
@@ -67,7 +75,6 @@ class FeatureContext extends MinkContext
      */
     public function anExistingRandomInvoice()
     {
-        $createdOn = '2019-05-05';
         $name = 'The random invoice';
         $address = 'Av. Random, 24';
         $idNumber = '77885544K';
@@ -76,10 +83,18 @@ class FeatureContext extends MinkContext
         $hasBeenCharged = 0;
         $commments = 'None comments';
         $type = 0;
-        $sqlQuery = "insert into factura values ('1','" . $name . "','" . $address . "','" . $idNumber . "'," .
-            "'" . $details . "','" . $cost . "','" . $commments . "','" . $type . "','" . $createdOn . "'," .
-            "'" . $createdOn . "','" . $hasBeenCharged . "', DEFAULT)";
-        $this->db->query($sqlQuery);
+        $newInvoice = $this->buildAnInvoiceWith([
+            'num_reg' => 1,
+            'nom' => $name,
+            'adreca' => $address,
+            'nif' => $idNumber,
+            'detalls' => $details,
+            'factura' => $cost,
+            'cobrada' => $hasBeenCharged,
+            'tipus' => $type,
+            'observacions' => $commments
+        ]);
+        $this->insertIntoDatabaseAGivenInvoiceInArray($newInvoice);
     }
 
     /**
@@ -197,15 +212,15 @@ class FeatureContext extends MinkContext
             'num_reg' => $data['num_reg'] ?? 1,
             'nom' => $data['nom'] ?? 'Random invoice',
             'adreca' => $data['adreca'] ?? 'c/ first invoice',
-            'nif' => '11111111K',
-            'detalls' => 'Some details about first invoice',
+            'nif' => $data['nif'] ?? '11111111K',
+            'detalls' => $data['detalls'] ?? 'Some details about first invoice',
             'factura' => $data['factura'] ?? 12.5,
-            'observacions' => 'No comments',
+            'observacions' => $data['observacions'] ?? 'No comments',
             'tipus' => $data['tipus'] ?? 0,
             'fecha_solicitud' => $data['fecha_solicitud'] ?? '2019-05-05',
-            'fecha' => '2019-06-06',
+            'fecha' => $data['fecha'] ?? '2019-06-06',
             'cobrada' => $data['cobrada'] ?? 0,
-            'modificat' => 1
+            'modificat' => $data['modificat'] ?? 1
         ];
     }
 
