@@ -4,7 +4,7 @@ php:
   - '7.3'
 
 env:
-  - MYSQL_USER=travis MYSQL_PASSWORD=dbpwd MYSQL_DATABASE=facturini MYSL_HOST=127.0.0.1
+  - MYSQL_USER=travis MYSQL_PASSWORD=dbpwd MYSQL_DATABASE=facturini MYSQL_HOST=127.0.0.1
 
 notifications:
   email:

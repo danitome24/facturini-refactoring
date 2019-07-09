@@ -19,7 +19,7 @@ class FeatureContext extends MinkContext
     public function __construct()
     {
         require __DIR__ . '/../../../config.php';
-var_dump($dbhost, $dbuname);
+
         $this->dbConnection = MysqliConnection::create($dbhost, $dbuname, $dbpass, $dbname);
         $this->db = new MysqliQuery($this->dbConnection, false);
     }
