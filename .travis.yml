@@ -4,9 +4,7 @@ php:
   - '7.3'
 
 env:
-  - MYSQL_USER=troll
-  - MYSQL_PASSWORD=dbpwd
-  - MYSQL_DATABASE=facturini
+  - MYSQL_USER=troll MYSQL_PASSWORD=dbpwd MYSQL_DATABASE=facturini
 
 notifications:
   email:
