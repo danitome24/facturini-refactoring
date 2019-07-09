@@ -1,0 +1,10 @@
+image: php:7.3
+
+before_script:
+  - apt-get install git -yqq
+  - curl -sS https://getcomposer.org/installer | php
+  - php composer.phar install
+
+test:behat:
+  script:
+    - vendor/bin/behat
