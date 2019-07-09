@@ -18,7 +18,8 @@ services:
 
 before_install:
   - composer self-update
-  - mysql -u travis < db/factura.sql
+  - mysql -e 'CREATE DATABASE facturini'
+  - mysql -u travis facturini < db/factura.sql
 
 install:
   - composer install
