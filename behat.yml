@@ -1,0 +1,12 @@
+default:
+  autoload:
+    '': '%paths.base%/tests/characterization/bootstrap'
+  suites:
+    default:
+      contexts: [FeatureContext]
+      paths: ['%paths.base%/tests/characterization/']
+
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      default_session: goutte
