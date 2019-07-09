@@ -19,6 +19,7 @@ services:
 before_install:
   - composer self-update
   - mysql -e 'CREATE DATABASE facturini'
+  - mysql -u root -e "GRANT ALL PRIVILEGES ON facturini.* TO 'travis'@'%';";
   - mysql -u travis facturini < db/factura.sql
 
 install:
