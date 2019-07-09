@@ -4,7 +4,7 @@ php:
   - '7.3'
 
 env:
-  - MYSQL_USER=troll MYSQL_PASSWORD=dbpwd MYSQL_DATABASE=facturini
+  - MYSQL_USER=travis MYSQL_PASSWORD=dbpwd MYSQL_DATABASE=facturini
 
 notifications:
   email:
@@ -13,8 +13,12 @@ notifications:
     on_success: never
     on_failure: always
 
-before_script:
+services:
+  - mysql
+
+before_install:
   - composer self-update
+  - mysql -u troll db/factura.sql
 
 install:
   - composer install
