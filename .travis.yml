@@ -17,4 +17,4 @@ install:
   - composer install
 
 script:
-  - behat
+  - vendor/bin/behat
