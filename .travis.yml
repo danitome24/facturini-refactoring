@@ -1,0 +1,20 @@
+language: php
+
+php:
+  - '7.3'
+
+notifications:
+  email:
+    recipients:
+      - danieltomefer@gmail.com
+    on_success: never
+    on_failure: always
+
+before_script:
+  - composer self-update
+
+install:
+  - composer install
+
+script:
+  - behat
