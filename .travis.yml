@@ -19,6 +19,7 @@ services:
 before_install:
   - composer self-update
   - mysql -e 'CREATE DATABASE facturini'
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('dbpwd') WHERE user='travis';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - mysql -u travis facturini < db/factura.sql
 
 install:
