@@ -18,7 +18,7 @@ services:
 
 before_install:
   - composer self-update
-  - mysql -u troll db/factura.sql
+  - mysql -u travis db/factura.sql
 
 install:
   - composer install
