@@ -12,12 +12,16 @@ notifications:
       - danieltomefer@gmail.com
     on_success: never
     on_failure: always
+    
+addons:
+  chrome: stable
 
 services:
   - mysql
 
 before_install:
   - composer self-update
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - mysql -e 'CREATE DATABASE facturini'
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('dbpwd') WHERE user='travis';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - mysql -u root -e "GRANT ALL PRIVILEGES ON facturini.* TO 'travis'@'%';";
