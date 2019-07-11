@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cbec750e06fafebec6d912b5b8d29c9",
+    "content-hash": "3ca30553ded5989577dd5a28b2f73eb1",
     "packages": [
         {
             "name": "rebuy/ezpdf",
@@ -1902,8 +1902,6 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "ext-mysqli": "*"
-    },
+    "platform": [],
     "platform-dev": []
 }

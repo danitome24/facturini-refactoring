@@ -40,6 +40,6 @@ final class MysqliQuery implements Query
             return new MysqliResultSet($result);
         }
 
-        return false;
+        throw new \Exception(sprintf($result));
     }
 }

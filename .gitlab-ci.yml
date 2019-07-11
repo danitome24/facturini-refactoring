@@ -1,0 +1,24 @@
+image: php:7.3
+
+services:
+  - mysql:5.6
+
+variables:
+  MYSQL_DATABASE: "facturini"
+  MYSQL_ROOT_PASSWORD: "dbpwd"
+  MYSQL_HOST: "mysql"
+  MYSQL_USER: "gitlabci"
+  MYSQL_PASSWORD: "dbpwd"
+
+before_script:
+  - bash ci/docker_install.sh > /dev/null
+  - curl -sS https://getcomposer.org/installer | php
+  - php composer.phar install
+  - php -S 0.0.0.0:80 -t . &> /dev/null &
+  - echo "SELECT 'OK';" | mysql --user=gitlabci --password="$MYSQL_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+  - mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -e "use $MYSQL_DATABASE"
+  - mysql -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE  < db/factura.sql
+
+test:behat:
+  script:
+    - vendor/bin/behat --colors
