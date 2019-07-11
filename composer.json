@@ -28,8 +28,7 @@
         "stop-server": "docker-compose stop"
     },
     "require": {
-        "rebuy/ezpdf": "^0.0.9",
-        "ext-mysqli": "*"
+        "rebuy/ezpdf": "^0.0.9"
     },
     "require-dev": {
         "behat/behat": "^3.5",
