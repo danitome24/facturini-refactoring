@@ -6,7 +6,7 @@
 set -xe
 
 apt-get update -yqq
-apt-get install mysql-client libmysqlclient-dev -yqq
+#apt-get install mysql-client libmysqlclient-dev -yqq
 
 # Install mysql driver
 # Here you can install any other extension that you need
