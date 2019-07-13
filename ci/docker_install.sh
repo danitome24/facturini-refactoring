@@ -13,6 +13,8 @@ apt-get install git mysql-client zip -yqq
 # Here you can install any other extension that you need
 docker-php-ext-install pdo_mysql mysqli
 
+mysql --user=gitlabci --password="$MYSQL_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -e "use $MYSQL_DATABASE"
 mysql -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE  < db/factura.sql
 
 php -S 0.0.0.0:80 -t . &> /dev/null &
