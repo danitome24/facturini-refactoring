@@ -25,11 +25,12 @@ build:
     - php composer.phar install
 
 test:behat:
+  image: mysql:5.6
   services:
     - mysql:5.6
   stage: test
   before_script:
-    - mysql --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+    - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
     - bash ci/docker_install.sh > /dev/null
   script:
     - vendor/bin/behat --colors
