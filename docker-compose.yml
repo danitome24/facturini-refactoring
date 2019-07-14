@@ -8,11 +8,11 @@ services:
     ports:
       - "8080:80"
     links:
-      - mysql:mysql
+      - db:mysql
     volumes:
       - .:/var/www/html
 
-  mysql:
+  db:
     image: mysql:5.6
     command: --bind-address=0.0.0.0 --max-connections=1500
     ports:
@@ -21,13 +21,13 @@ services:
     volumes:
       - ./.mysqldata:/var/lib/mysql
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:4.7
-    ports:
-      - "8888:80"
-    env_file: docker/.env
-    links:
-      - mysql:db
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin:4.7
+#    ports:
+#      - "8888:80"
+#    env_file: docker/.env
+#    links:
+#      - mysql:db
 
 volumes:
   .mysqldata:
