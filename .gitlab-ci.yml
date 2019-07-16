@@ -20,12 +20,10 @@ test:behat:
   stage: test
   image: tiangolo/docker-with-compose
   before_script:
-    - docker info
     - cp docker/.env.dist docker/.env
     - docker-compose build
     - docker-compose up -d
     - sleep 30
-    - docker-compose exec -T db mysql -u gitlabci -pdbpwd -e "CREATE DATABASE IF NOT EXISTS facturini"
     - docker-compose exec -T db mysql -u gitlabci -pdbpwd facturini < db/factura.sql
   script:
     - docker-compose exec -T php-apache vendor/bin/behat --colors
