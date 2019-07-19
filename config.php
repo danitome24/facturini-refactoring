@@ -1,9 +1,9 @@
 <?php
 
-$dbhost = getenv('MYSQL_HOST');
-$dbuname = getenv('MYSQL_USER');
-$dbpass = getenv('MYSQL_PASSWORD');
-$dbname = getenv('MYSQL_DATABASE');
+$dbhost = getenv('PHINX_MYSQL_HOST');
+$dbuname = getenv('PHINX_MYSQL_USER');
+$dbpass = getenv('PHINX_MYSQL_PASSWORD');
+$dbname = getenv('PHINX_MYSQL_DATABASE');
 $dbtype = "MySQL";
 $dbDebugMode = false;
 

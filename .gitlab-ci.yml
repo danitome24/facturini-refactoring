@@ -24,6 +24,6 @@ test:behat:
     - docker-compose build
     - docker-compose up -d
     - sleep 30
-    - docker-compose exec -T db mysql -u gitlabci -pdbpwd facturini < db/factura.sql
+    - docker-compose exec -T php-apache php vendor/bin/phinx migrate
   script:
     - docker-compose exec -T php-apache vendor/bin/behat --colors

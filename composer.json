@@ -28,7 +28,8 @@
         "stop-server": "docker-compose stop"
     },
     "require": {
-        "rebuy/ezpdf": "^0.0.9"
+        "rebuy/ezpdf": "^0.0.9",
+        "robmorgan/phinx": "dev-master"
     },
     "require-dev": {
         "behat/behat": "^3.5",
