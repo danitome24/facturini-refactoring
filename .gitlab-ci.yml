@@ -23,7 +23,7 @@ test:behat:
     - cp docker/.env.dist docker/.env
     - docker-compose build
     - docker-compose up -d
-    # - sleep 30
+    - sleep 30
     - docker-compose exec -T php-apache vendor/bin/phinx migrate -e production
   script:
     - docker-compose exec -T php-apache vendor/bin/behat --colors
