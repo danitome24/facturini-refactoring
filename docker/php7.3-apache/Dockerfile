@@ -7,7 +7,7 @@ RUN apt update && apt install git vim -y
 #ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 #Enable pdo and pdo_mysql extensions
-RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install mysqli pdo_mysql
 
 #Set uid and gid 1000 for www-data (I assume that my user on host have id 1000)
 RUN usermod -u 1000 www-data

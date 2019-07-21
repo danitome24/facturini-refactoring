@@ -21,9 +21,8 @@ test:behat:
   image: tiangolo/docker-with-compose
   before_script:
     - cp docker/.env.dist docker/.env
-    - docker-compose build
     - docker-compose up -d
     - sleep 30
-    - docker-compose exec -T db mysql -u gitlabci -pdbpwd facturini < db/factura.sql
+    - docker-compose exec -T php-apache vendor/bin/phinx migrate -e production
   script:
     - docker-compose exec -T php-apache vendor/bin/behat --colors
