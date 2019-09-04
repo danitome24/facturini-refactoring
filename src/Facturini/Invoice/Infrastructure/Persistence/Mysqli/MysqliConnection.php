@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Facturini\Database\Mysqli;
+namespace Facturini\Invoice\Infrastructure\Persistence\Mysqli;
 
-use Facturini\Database\Connection;
+use Facturini\Invoice\Infrastructure\Persistence\Connection;
 use mysqli;
 
 final class MysqliConnection implements Connection

@@ -1,7 +1,7 @@
 <?php
 
-use Facturini\Database\Mysqli\MysqliConnection;
-use Facturini\Database\Mysqli\MysqliQuery;
+use Facturini\Invoice\Infrastructure\Persistence\Mysqli\MysqliConnection;
+use Facturini\Invoice\Infrastructure\Persistence\Mysqli\MysqliQuery;
 
 require_once 'config.php';
 require_once __DIR__ . '/vendor/autoload.php';

@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Facturini\Database\Mysqli;
+namespace Facturini\Invoice\Infrastructure\Persistence\Mysqli;
 
-use Facturini\Database\ResultSet;
+use Facturini\Invoice\Infrastructure\Persistence\ResultSet;
 
 final class MysqliResultSet implements ResultSet
 {

@@ -5,7 +5,7 @@
  * GitHub: danitome24
  */
 
-namespace Facturini\Database;
+namespace Facturini\Invoice\Infrastructure\Persistence;
 
 interface Connection
 {

@@ -6,11 +6,11 @@
  */
 declare(strict_types=1);
 
-namespace Facturini\Database\Mysqli;
+namespace Facturini\Invoice\Infrastructure\Persistence\Mysqli;
 
-use Facturini\Database\Connection;
-use Facturini\Database\Query;
-use Facturini\Database\ResultSet;
+use Facturini\Invoice\Infrastructure\Persistence\Connection;
+use Facturini\Invoice\Infrastructure\Persistence\Query;
+use Facturini\Invoice\Infrastructure\Persistence\ResultSet;
 
 final class MysqliQuery implements Query
 {
